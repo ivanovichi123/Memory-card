@@ -1,0 +1,37 @@
+header {
+    background-color: rgb(238, 21, 21);
+    border: solid 2px black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 1rem;
+}
+
+#theHeader {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.theTitle {
+    font-weight: bolder;
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+.theSubtitle {
+    grid-column: 1/2;
+    grid-row: 2/3;
+    font-size: 1.3rem;
+}
+
+#theScore {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    align-self: end;
+    font-size: 1.3rem;
+}
+
+#theBestScore {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    font-size: 1.3rem;
+}

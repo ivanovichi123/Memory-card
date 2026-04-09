@@ -82,3 +82,7 @@ button {
 }
 
 /* end of the reset */
+
+body {
+    background-color: white;
+}
