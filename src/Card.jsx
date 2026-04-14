@@ -1,31 +1,28 @@
-import './Card.css'
-
+import "./Card.css";
 
 function Card() {
-    const pokemonCards = [
-        {id: 1, Name: "A pokemon", image: "Image of a pokemon"},
-        {id: 2, Name: "Another pokemon", image: "Image of a pokemon"},
-        {id: 3, Name: "A new pokemon", image: "Image of a pokemon"},
-        {id: 4, Name: "Thats a pokemon", image: "Image of a pokemon"},
-    ];
+  const pokemonCards = [
+    { id: 1, Name: "A pokemon", image: "Image of a pokemon" },
+    { id: 2, Name: "Another pokemon", image: "Image of a pokemon" },
+    { id: 3, Name: "A new pokemon", image: "Image of a pokemon" },
+    { id: 4, Name: "Thats a pokemon", image: "Image of a pokemon" },
+  ];
 
-
-
-    return (
-        <main id='theContent'>
-            {pokemonCards.map((individualCard) => {
-                return (
-                    <div key={individualCard.id} className={`Card`}>
-                        <img src="/Dummy.jpg" alt="Pokemon" />
-                        <p className='theName'>{individualCard.Name}</p>
-                    </div>
-                )
-            })}
-        </main>
-    )
+  return (
+    <main id="theContent">
+      {pokemonCards.map((individualCard) => {
+        return (
+          <div key={individualCard.id} className={`Card`}>
+            <img src="/Dummy.jpg" alt="Pokemon" />
+            <p className="theName">{individualCard.Name}</p>
+          </div>
+        );
+      })}
+    </main>
+  );
 }
 
-export { Card }
+export { Card };
 
 //   return (
 //     <div className="theContent" style={{ display: props.theDisplay }}>
@@ -52,12 +49,6 @@ export { Card }
 //       })}
 //     </div>
 //   );
-
-
-
-
-
-
 
 // function Card({state}) {
 //     function dummy() {

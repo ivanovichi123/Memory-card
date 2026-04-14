@@ -1,14 +1,13 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import { Content } from './Content.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import { Content } from "./Content.jsx";
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Content />
   </StrictMode>,
-)
-
+);
 
 //EL PLAN:
 //1.- CREAR EL TITULO DE LA  PAGINA: HECHO
