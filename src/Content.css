@@ -23,6 +23,10 @@ header {
   font-size: 1.3rem;
 }
 
+#gameText {
+  font-size: 1.3rem;
+}
+
 #theScore {
   grid-column: 2/3;
   grid-row: 1/2;

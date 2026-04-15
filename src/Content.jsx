@@ -3,11 +3,23 @@ import "./Content.css";
 import { Card } from "./Card.jsx";
 
 function Content() {
-  // const [example, setExample] = useState(0);
+  const [score, setScore] = useState(0);
+  const [gameText, setGameText] = useState("You can do it..");
 
-  // function theSuperDummy() {
-  //   setExample(example + 1);
-  // }
+  function scoreChanges() {
+    setScore(score + 1);
+    setGameText("You can do it..");
+  }
+
+  function scoreLose() {
+    setScore(0);
+    setGameText("You lose..");
+  }
+
+  function wonGame() {
+    setScore(score + 1);
+    setGameText("You won!!");
+  }
 
   return (
     <>
@@ -18,11 +30,12 @@ function Content() {
             In this game you need to click the cards to earn points without
             clicking on the same character twice
           </p>
-          <p id="theScore">Score: </p>
-          <p id="theBestScore">Best score: </p>
+          <p id="gameText">{gameText}</p>
+          <p id="theScore">Score: {score}</p>
+          <p id="theBestScore">Best score: {score}</p>
         </div>
       </header>
-      <Card />
+      <Card theFunction={scoreChanges} theLoseFunction={scoreLose} theWinFunction={wonGame}/>
     </>
   );
 }
