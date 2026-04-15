@@ -9,6 +9,19 @@ function Card(props) {
     { id: 4, Name: "Thats a pokemon", image: "Image of a pokemon" },
   ];
 
+  let newArray = [];
+
+  function changeOrder() {
+    let copyArray = [...pokemonCards];
+    let maxAmount = copyArray.length;
+    let index = 0;
+    for(let i = maxAmount; i > 0; i--) {
+      index = Math.floor(Math.random() * ((i - 1) - 0 + 1)) + 0;
+      newArray.push(copyArray[index]);
+      copyArray.splice(index, 1);
+    }
+  }
+
   let alreadyUse = useRef([]);
 
   function changeScore(target) {
@@ -28,9 +41,11 @@ function Card(props) {
     props.theFunction();
   }
 
+  changeOrder();
+
   return (
     <main id="theContent">
-      {pokemonCards.map((individualCard) => {
+      {newArray.map((individualCard) => {
         return (
           <div key={individualCard.id} id={individualCard.id} className={`Card`} onClick={(e) => changeScore(e.currentTarget)}>
             <img src="/Dummy.jpg" alt="Pokemon" />
