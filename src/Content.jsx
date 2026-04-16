@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useState } from "react";
 import "./Content.css";
 import { Card } from "./Card.jsx";
@@ -5,9 +6,13 @@ import { Card } from "./Card.jsx";
 function Content() {
   const [score, setScore] = useState(0);
   const [gameText, setGameText] = useState("You can do it..");
+  const [bestScore, setBestScore] = useState(0);
 
   function scoreChanges() {
     setScore(score + 1);
+    if(score >= bestScore) {
+      setBestScore(bestScore + 1);
+    }
     setGameText("You can do it..");
   }
 
@@ -18,6 +23,9 @@ function Content() {
 
   function wonGame() {
     setScore(score + 1);
+    if(score >= bestScore) {
+      setBestScore(bestScore + 1);
+    }
     setGameText("You won!!");
   }
 
@@ -32,7 +40,7 @@ function Content() {
           </p>
           <p id="gameText">{gameText}</p>
           <p id="theScore">Score: {score}</p>
-          <p id="theBestScore">Best score: {score}</p>
+          <p id="theBestScore">Best score: {bestScore}</p>
         </div>
       </header>
       <Card theFunction={scoreChanges} theLoseFunction={scoreLose} theWinFunction={wonGame}/>

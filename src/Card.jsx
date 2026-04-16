@@ -36,7 +36,7 @@ function Card(props) {
   let alreadyUse = useRef([]);
 
   function changeScore(id) {
-        const scrollY = window.scrollY; 
+    const scrollY = window.scrollY; 
     for(let i = 0; i < alreadyUse.current.length; i++) {
       if(id === alreadyUse.current[i]) {
         props.theLoseFunction();
