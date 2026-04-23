@@ -1,27 +1,75 @@
 import { useRef } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Card.css";
 
-function Card(props) { 
-  const pokemonCards = [
-    { id: 1, Name: "A pokemon", image: "Image of a pokemon" },
-    { id: 2, Name: "Another pokemon", image: "Image of a pokemon" },
-    { id: 3, Name: "A new pokemon", image: "Image of a pokemon" },
-    { id: 4, Name: "Thats a pokemon", image: "Image of a pokemon" },
-    { id: 5, Name: "Yep, a pokemon", image: "Image of a pokemon"},
-    { id: 6, Name: "OMG, a pokemon", image: "Image of a pokemon"},
-    { id: 7, Name: "Pikmin is better", image: "Image of a pokemon"},
-    { id: 8, Name: "Hello i am a pokemon", image: "Image of a pokemon"},
-    { id: 9, Name: "Pokemon", image: "Image of a pokemon"},
-    { id: 10, Name: "A lot of pokemon", image: "Image of a pokemon"},
-    { id: 11, Name: "Many pokemon", image: "Image of a pokemon"},
-    { id: 12, Name: "You can do it", image: "Image of a pokemon"}
+function Card(props) {
+  let fetchDone = useRef(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if(fetchDone.current === false) {
+        fetchDone.current = true;
+      } else {
+        return;
+      }
+      let pokemonInformation = [
+        "pikachu", "ditto", "charmander", "sandshrew", "jigglypuff", "paras",
+        "psyduck", "slowpoke", "porygon", "natu", "quagsire", "ludicolo"
+      ];
+      let ultimateInfo = [];
+
+      try {
+        let information = pokemonInformation.map((pokemonIndividual) => {
+          return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonIndividual}/`).then(res => res.json());
+
+      });
+
+        console.log("The info " + information);
+
+        let answers = await Promise.all(information);
+
+        for (let i = 0; i < answers.length; i++) {
+          ultimateInfo.push(answers[i].sprites.other.dream_world.front_default);
+        }
+
+        setCards(() => {
+          let update = [...pokemonCardsDefault];
+          for (let i = 0; i < ultimateInfo.length; i++) {
+            update[i] = {...update[i], image: ultimateInfo[i]};
+          }
+          console.log(typeof(update));
+          return changeOrder(update);
+        })
+        console.log(answers);
+
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+
+
+  const pokemonCardsDefault = [
+    { id: 1, Name: "Pikachu", image: "Image of a pokemon" },
+    { id: 2, Name: "Ditto", image: "Image of a pokemon" },
+    { id: 3, Name: "Charmander", image: "Image of a pokemon" },
+    { id: 4, Name: "Sandshrew", image: "Image of a pokemon" },
+    { id: 5, Name: "Jigglypuff", image: "Image of a pokemon"},
+    { id: 6, Name: "Paras", image: "Image of a pokemon"},
+    { id: 7, Name: "Psyduck", image: "Image of a pokemon"},
+    { id: 8, Name: "Slowpoke", image: "Image of a pokemon"},
+    { id: 9, Name: "Porygon", image: "Image of a pokemon"},
+    { id: 10, Name: "Natu", image: "Image of a pokemon"},
+    { id: 11, Name: "Quagsire", image: "Image of a pokemon"},
+    { id: 12, Name: "Ludicolo", image: "Image of a pokemon"}
   ];
 
-  let [cards, setCards] = useState(pokemonCards);
+  let [cards, setCards] = useState(pokemonCardsDefault);
 
-  function changeOrder() {
-    let copyArray = [...cards];
+  function changeOrder(array) {
+    let copyArray = [...array];
     let changeArray = [];
     let maxAmount = copyArray.length;
     let index = 0;
@@ -30,8 +78,14 @@ function Card(props) {
       changeArray.push(copyArray[index]);
       copyArray.splice(index, 1);
     }
-    setCards(changeArray);
+    return changeArray;
   }
+
+  useEffect(() => {
+    setCards(current => {
+      return changeOrder(current);
+    });
+  }, []);
 
   let alreadyUse = useRef([]);
 
@@ -50,7 +104,9 @@ function Card(props) {
       return;
     }
     props.theFunction();
-    changeOrder();
+    setCards(current => {
+      return changeOrder(current);
+    });
 
     requestAnimationFrame(() => {
       window.scrollTo(0, scrollY);
@@ -62,7 +118,7 @@ function Card(props) {
       {cards.map((individualCard) => {
         return (
           <div key={individualCard.id} className={`Card`} onClick={() => changeScore(individualCard.id)}>
-            <img src="/Dummy.jpg" alt="Pokemon" />
+            <img src={individualCard.image} alt="Pokemon" />
             <p className="theName">{individualCard.Name}</p>
           </div>
         );
