@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Content.css";
+import "../styles/Content.css";
 import { Card } from "./Card.jsx";
 
 function Content() {

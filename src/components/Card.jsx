@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useState, useEffect } from "react";
-import "./Card.css";
+import "../styles/Card.css";
 
 function Card(props) {
   //Variable to avoid fetching from the API two times in strict mode
