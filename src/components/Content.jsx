@@ -3,7 +3,6 @@ import "./Content.css";
 import { Card } from "./Card.jsx";
 
 function Content() {
-
   //Variables for the score
   const [score, setScore] = useState(0);
   const [gameText, setGameText] = useState("You can do it..");
@@ -13,7 +12,7 @@ function Content() {
   function scoreChanges() {
     setScore(score + 1);
     //If score is bigger than the best score
-    if(score >= bestScore) {
+    if (score >= bestScore) {
       //Increment best score
       setBestScore(bestScore + 1);
     }
@@ -31,7 +30,7 @@ function Content() {
   function wonGame() {
     setScore(score + 1);
     //If score is bigger than the best score
-    if(score >= bestScore) {
+    if (score >= bestScore) {
       //Increment best score
       setBestScore(bestScore + 1);
     }
@@ -52,7 +51,11 @@ function Content() {
           <p id="theBestScore">Best score: {bestScore}</p>
         </div>
       </header>
-      <Card theFunction={scoreChanges} theLoseFunction={scoreLose} theWinFunction={wonGame}/>
+      <Card
+        theFunction={scoreChanges}
+        theLoseFunction={scoreLose}
+        theWinFunction={wonGame}
+      />
     </>
   );
 }
